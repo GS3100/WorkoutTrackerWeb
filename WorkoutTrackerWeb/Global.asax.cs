@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using Newtonsoft.Json.Linq;
 
 namespace WorkoutTrackerWeb
 {
@@ -16,6 +17,7 @@ namespace WorkoutTrackerWeb
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //Response.Write("Some global stuff");
         }
     }
 }

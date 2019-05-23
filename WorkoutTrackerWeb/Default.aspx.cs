@@ -11,7 +11,7 @@ namespace WorkoutTrackerWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Response.Write("How bout dat");
         }
     }
 }
