@@ -20,6 +20,7 @@ namespace WorkoutTrackerWeb
 
                 var PersonDetail = query.FirstOrDefault<Person>();
 
+                UserDetails.Add("IdPerson", PersonDetail.IdPerson);
                 UserDetails.Add("FirstName", PersonDetail.FirstName);
                 UserDetails.Add("LastName", PersonDetail.LastName);
                 UserDetails.Add("DOB", PersonDetail.DOB);
@@ -32,13 +33,17 @@ namespace WorkoutTrackerWeb
 
         }
 
-        public void UpdateDetails(int ID, int val)
+        public void UpdateProfile(int ID, int weight, int heightInch)
         {
+            //for now just focus on updating weight of the person
             using(var context = new WorkoutTrackerEntities1())
             {
-                var GetPerson = JObject.Parse(LoadProfile(ID)); //copy values into PersonDetHistory table first
+                context.Database.ExecuteSqlCommand("INSERT INTO PersonDetHistory VALUES(" + ID + ", NULL, " + weight + ",GetDate())");
+                context.SaveChanges();
 
-                //var query = from userProfile in context.PersonDetHistory;
+                //now update the master table with new values
+                context.Database.ExecuteSqlCommand("UPDATE Person SET WeightLbs = " + weight + " WHERE IdPerson = " + ID);
+                context.SaveChanges();
             }
         }
     }

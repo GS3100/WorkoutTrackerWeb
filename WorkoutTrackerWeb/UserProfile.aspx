@@ -30,12 +30,13 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell ColumnSpan="2">
-                <asp:Button CssClass="btn btn-info"  ID="btnUpdateUser" runat="server" Text="Update" />
+                <asp:Button CssClass="btn btn-info"  ID="BtnUpdateUser" OnClick="BtnUpdateUser_Click" runat="server" Text="Update" />
 
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-
+        <asp:TextBox ID="hidID" runat="server" Visible="False"></asp:TextBox>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
     </div>
 
     <div class="clearfix"></div>

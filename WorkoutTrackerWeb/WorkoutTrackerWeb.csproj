@@ -230,6 +230,21 @@
     <Compile Include="Models\PersonDetHistory.cs">
       <DependentUpon>WTModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonWorkoutDetail.cs">
+      <DependentUpon>WTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonWorkoutMaster.cs">
+      <DependentUpon>WTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkoutBodyArea.cs">
+      <DependentUpon>WTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkoutExercise.cs">
+      <DependentUpon>WTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkoutMachine.cs">
+      <DependentUpon>WTModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WTModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

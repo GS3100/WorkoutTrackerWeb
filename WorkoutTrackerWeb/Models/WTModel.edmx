@@ -19,7 +19,7 @@
         </EntityType>
         <EntityType Name="PersonDetHistory">
           <Key>
-            <PropertyRef Name="IdPerson" />
+            <PropertyRef Name="IdPersonDetail" />
           </Key>
           <Property Name="IdPersonDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdPerson" Type="int" Nullable="false" />
@@ -27,9 +27,60 @@
           <Property Name="WeightLbs" Type="int" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="PersonWorkoutDetail">
+          <Key>
+            <PropertyRef Name="IdPersonWorkout" />
+            <PropertyRef Name="IdDetailLine" />
+          </Key>
+          <Property Name="IdPersonWorkout" Type="int" Nullable="false" />
+          <Property Name="IdDetailLine" Type="int" Nullable="false" />
+          <Property Name="SetNumber" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="Reps" Type="int" Nullable="false" />
+          <Property Name="Machine" Type="int" />
+          <Property Name="Exercise" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonWorkoutMaster">
+          <Key>
+            <PropertyRef Name="IdWorkout" />
+          </Key>
+          <Property Name="IdWorkout" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPerson" Type="int" Nullable="false" />
+          <Property Name="WorkoutDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkoutBodyArea">
+          <Key>
+            <PropertyRef Name="IdBodyArea" />
+          </Key>
+          <Property Name="IdBodyArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkoutExercise">
+          <Key>
+            <PropertyRef Name="IdExercise" />
+          </Key>
+          <Property Name="IdExercise" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBodyArea" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkoutMachine">
+          <Key>
+            <PropertyRef Name="IdMachine" />
+          </Key>
+          <Property Name="IdMachine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="WorkoutTrackerModelStoreContainer">
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonDetHistory" EntityType="Self.PersonDetHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonWorkoutDetail" EntityType="Self.PersonWorkoutDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonWorkoutMaster" EntityType="Self.PersonWorkoutMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutBodyArea" EntityType="Self.WorkoutBodyArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutExercise" EntityType="Self.WorkoutExercise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutMachine" EntityType="Self.WorkoutMachine" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -49,17 +100,68 @@
         </EntityType>
         <EntityContainer Name="WorkoutTrackerEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="People" EntityType="Self.Person" />
-          <EntitySet Name="PersonDetHistories" EntityType="WorkoutTrackerModel.PersonDetHistory" />
+          <EntitySet Name="PersonDetHistory" EntityType="WorkoutTrackerModel.PersonDetHistory" />
+          <EntitySet Name="PersonWorkoutDetails" EntityType="WorkoutTrackerModel.PersonWorkoutDetail" />
+          <EntitySet Name="PersonWorkoutMasters" EntityType="WorkoutTrackerModel.PersonWorkoutMaster" />
+          <EntitySet Name="WorkoutBodyAreas" EntityType="WorkoutTrackerModel.WorkoutBodyArea" />
+          <EntitySet Name="WorkoutExercises" EntityType="WorkoutTrackerModel.WorkoutExercise" />
+          <EntitySet Name="WorkoutMachines" EntityType="WorkoutTrackerModel.WorkoutMachine" />
         </EntityContainer>
         <EntityType Name="PersonDetHistory">
           <Key>
-            <PropertyRef Name="IdPerson" />
+            <PropertyRef Name="IdPersonDetail" />
           </Key>
           <Property Name="IdPersonDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdPerson" Type="Int32" Nullable="false" />
           <Property Name="HeightInches" Type="Int32" />
           <Property Name="WeightLbs" Type="Int32" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PersonWorkoutDetail">
+          <Key>
+            <PropertyRef Name="IdPersonWorkout" />
+            <PropertyRef Name="IdDetailLine" />
+          </Key>
+          <Property Name="IdPersonWorkout" Type="Int32" Nullable="false" />
+          <Property Name="IdDetailLine" Type="Int32" Nullable="false" />
+          <Property Name="SetNumber" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="Reps" Type="Int32" Nullable="false" />
+          <Property Name="Machine" Type="Int32" />
+          <Property Name="Exercise" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonWorkoutMaster">
+          <Key>
+            <PropertyRef Name="IdWorkout" />
+          </Key>
+          <Property Name="IdWorkout" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPerson" Type="Int32" Nullable="false" />
+          <Property Name="WorkoutDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="WorkoutBodyArea">
+          <Key>
+            <PropertyRef Name="IdBodyArea" />
+          </Key>
+          <Property Name="IdBodyArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WorkoutExercise">
+          <Key>
+            <PropertyRef Name="IdExercise" />
+          </Key>
+          <Property Name="IdExercise" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBodyArea" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WorkoutMachine">
+          <Key>
+            <PropertyRef Name="IdMachine" />
+          </Key>
+          <Property Name="IdMachine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -80,7 +182,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PersonDetHistories">
+          <EntitySetMapping Name="PersonDetHistory">
             <EntityTypeMapping TypeName="WorkoutTrackerModel.PersonDetHistory">
               <MappingFragment StoreEntitySet="PersonDetHistory">
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
@@ -88,6 +190,56 @@
                 <ScalarProperty Name="HeightInches" ColumnName="HeightInches" />
                 <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
                 <ScalarProperty Name="IdPersonDetail" ColumnName="IdPersonDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonWorkoutDetails">
+            <EntityTypeMapping TypeName="WorkoutTrackerModel.PersonWorkoutDetail">
+              <MappingFragment StoreEntitySet="PersonWorkoutDetail">
+                <ScalarProperty Name="Exercise" ColumnName="Exercise" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Reps" ColumnName="Reps" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="SetNumber" ColumnName="SetNumber" />
+                <ScalarProperty Name="IdDetailLine" ColumnName="IdDetailLine" />
+                <ScalarProperty Name="IdPersonWorkout" ColumnName="IdPersonWorkout" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonWorkoutMasters">
+            <EntityTypeMapping TypeName="WorkoutTrackerModel.PersonWorkoutMaster">
+              <MappingFragment StoreEntitySet="PersonWorkoutMaster">
+                <ScalarProperty Name="WorkoutDate" ColumnName="WorkoutDate" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+                <ScalarProperty Name="IdWorkout" ColumnName="IdWorkout" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutBodyAreas">
+            <EntityTypeMapping TypeName="WorkoutTrackerModel.WorkoutBodyArea">
+              <MappingFragment StoreEntitySet="WorkoutBodyArea">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdBodyArea" ColumnName="IdBodyArea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutExercises">
+            <EntityTypeMapping TypeName="WorkoutTrackerModel.WorkoutExercise">
+              <MappingFragment StoreEntitySet="WorkoutExercise">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdBodyArea" ColumnName="IdBodyArea" />
+                <ScalarProperty Name="IdExercise" ColumnName="IdExercise" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutMachines">
+            <EntityTypeMapping TypeName="WorkoutTrackerModel.WorkoutMachine">
+              <MappingFragment StoreEntitySet="WorkoutMachine">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdMachine" ColumnName="IdMachine" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

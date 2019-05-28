@@ -94,12 +94,30 @@ namespace WorkoutTrackerWeb {
         protected global::System.Web.UI.WebControls.TextBox txtWt;
         
         /// <summary>
-        /// btnUpdateUser control.
+        /// BtnUpdateUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateUser;
+        protected global::System.Web.UI.WebControls.Button BtnUpdateUser;
+        
+        /// <summary>
+        /// hidID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox hidID;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
     }
 }

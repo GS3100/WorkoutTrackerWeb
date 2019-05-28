@@ -27,5 +27,10 @@ namespace WorkoutTrackerWeb.Models
     
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<PersonDetHistory> PersonDetHistory { get; set; }
+        public virtual DbSet<PersonWorkoutDetail> PersonWorkoutDetails { get; set; }
+        public virtual DbSet<PersonWorkoutMaster> PersonWorkoutMasters { get; set; }
+        public virtual DbSet<WorkoutBodyArea> WorkoutBodyAreas { get; set; }
+        public virtual DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+        public virtual DbSet<WorkoutMachine> WorkoutMachines { get; set; }
     }
 }

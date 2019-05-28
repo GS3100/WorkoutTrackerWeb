@@ -7,6 +7,11 @@
       <Diagram DiagramId="6d03d439aa9c46a1a07c4bb4f3711a8b" Name="Diagram1">
         <EntityTypeShape EntityType="WorkoutTrackerModel.Person" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WorkoutTrackerModel.PersonDetHistory" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WorkoutTrackerModel.PersonWorkoutDetail" Width="1.5" PointX="3.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WorkoutTrackerModel.PersonWorkoutMaster" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WorkoutTrackerModel.WorkoutBodyArea" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WorkoutTrackerModel.WorkoutExercise" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WorkoutTrackerModel.WorkoutMachine" Width="1.5" PointX="8.25" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

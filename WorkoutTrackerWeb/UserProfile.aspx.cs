@@ -23,7 +23,6 @@ namespace WorkoutTrackerWeb
                 string DOB = GetPerson["DOB"].ToString();
                 int Height = Int32.Parse(GetPerson["Height"].ToString());
                 int Weight = Int32.Parse(GetPerson["Weight"].ToString());
-
                 int HeightFt = Height / 12;
                 int HeightIn = Height % 12;
 
@@ -31,23 +30,35 @@ namespace WorkoutTrackerWeb
                 lblHeight.Text = HeightFt.ToString() + "ft " + HeightIn.ToString() + "in";
                 lblDOB.Text = DOB;
                 lblWeight.Text = Weight.ToString();
-
-                //
+                hidID.Text = GetPerson["IdPerson"].ToString();
                 txtHeightFt.Text = HeightFt.ToString();
                 txtHeightIn.Text = HeightIn.ToString();
                 txtWt.Text = Weight.ToString();
             }
         }
-        void btnUpdateUser_Click(Object sender, EventArgs e)
+        public void BtnUpdateUser_Click(Object sender, EventArgs e)
         {
+            /**/
+            User User = new User();
             //UPDATE  the PersonDetails table with new information/update Person table with new values as well
-            if(txtWt.Text != lblWeight.Text)
-            {
-                txtWt.Text = "";
-                
-            }
-                
+            JObject UserDetails = new JObject();
+            //if weight has changed then update 
             
+            if (txtWt.Text != lblWeight.Text)
+            {
+                int ID = Int32.Parse(hidID.Text);
+                int Weight = Int32.Parse(txtWt.Text);
+                User.UpdateProfile(ID,Weight,0);
+
+                //clear out postback cache to update view
+                Response.Redirect(Request.RawUrl, false);
+            }
+            else
+            {
+                Label1.Text = "false";
+            }
+
+           
         }
 
 
