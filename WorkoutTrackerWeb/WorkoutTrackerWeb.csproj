@@ -134,6 +134,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\WorkoutDataTable.js" />
     <Content Include="WorkoutInput.aspx" />
     <EntityDeploy Include="Models\WTModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -305,6 +306,7 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Workout.cs" />
     <Compile Include="WorkoutInput.aspx.cs">
       <DependentUpon>WorkoutInput.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
