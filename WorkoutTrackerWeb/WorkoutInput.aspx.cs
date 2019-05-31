@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
+using System.Collections;
 using Newtonsoft.Json.Linq;
 
 namespace WorkoutTrackerWeb
@@ -26,6 +25,8 @@ namespace WorkoutTrackerWeb
                 Workout.BodyArea bodyArea = new Workout.BodyArea();
                 var loadBodyArea = JArray.Parse(@bodyArea.LoadBodyArea());
                 int c = 0;
+                selBodyArea.Items.Add("Select");
+                selExercise.Items.Add("Select");
                 foreach (var obj in loadBodyArea.Children()) {
                     selBodyArea.Items.Add(loadBodyArea[c]["Name"].ToString());
                     selBodyArea.Items[c].Value = loadBodyArea[c]["IdBodyArea"].ToString(); //add id to value
@@ -60,28 +61,66 @@ namespace WorkoutTrackerWeb
             var loadExercises = JArray.Parse(bodyArea.LoadExercises(selValue));
  
             int c = 0;
-            foreach (var obj in loadExercises.Children())
+            selExercise.Items.Clear();
+            foreach (var items in loadExercises.Children())
             {
-                selExercise.Items.Add(loadExercises[c]["Name"].ToString());
-                selExercise.Items[c].Value = loadExercises[c]["IdExercise"].ToString(); //add id to value
-                c++;
+                //selExercise.Items.Add(loadExercises[items]["Name"].ToString());
+                //selExercise.Items[obj].Value = loadExercises[obj]["IdExercise"].ToString(); //add id to value
+                selExercise.Items.Add(items["Name"].ToString());
+                //selExercise.Items[obj].Value = loadExercises[obj]["IdExercise"].ToString()
             }
-
+            Response.Write(loadExercises.ToString());
         }
-        /*
+        /**/
         protected void btnAddToWorkout_OnClick(object sender, EventArgs e)
         {
-            var getWt = Request.Form["txtWt"]; //array
-            //create table data list
-            HtmlTableRow row;
-            HtmlTableCell cell;
-
-            row = new HtmlTableRow();
-            cell = new HtmlTableCell();
-            cell.InnerText = "test";
-            row.Cells.Add(cell);
+            //first time button is clicked write header record and return workoutid for log table
+            string[] arrReps;
+            string[] arrWt;
             
-            Label1.Text = getWt[0].ToString();
-        }*/
+            arrReps = Request.Form.GetValues("txtReps");
+            arrWt = Request.Form.GetValues("txtWt");
+            string date = txtDate.Value;
+            int sets = selNumOfSets.SelectedIndex;
+            int UID = 1;
+            Workout workout = new Workout();
+            //Session["WID"] = "";
+            string workoutLog = "";
+            try
+            {
+                string getExercise = selExercise.SelectedValue;
+
+                //insert new workout header first and assign to session
+                if (string.IsNullOrEmpty(Session["WID"] as string))
+                {
+                    //Session["WID"] = workout.InsertWorkoutMaster("", UID, date);
+                    Session["WID"] = "1";
+
+                    //insert first set of detail
+                    for(var i = 0; i < sets; i++)
+                    {
+                        //Response.Write("reps " + arrReps[i] + "<br/>");
+                        workoutLog = workout.InsertWorkoutDetail(Int32.Parse(Session["WID"].ToString()), i + 1, Int32.Parse(arrWt[i]), Int32.Parse(arrReps[i]), Int32.Parse(selExercise.SelectedValue), 0);
+                        Response.Write(workoutLog);
+                    }
+                }
+                else
+                {
+
+                    //insert detail
+                    for (var i = 0; i < sets; i++)
+                    {
+                        workoutLog = workout.InsertWorkoutDetail(Int32.Parse(Session["WID"].ToString()), i + 1, Int32.Parse(arrWt[i]), Int32.Parse(arrReps[i]), Int32.Parse(selExercise.SelectedValue), 0);
+                        Response.Write(workoutLog);
+                    }
+                }
+                
+            }
+            catch (Exception x)
+            {
+                lblErr.Text = x.ToString();
+            }
+            
+        }
     }
 }

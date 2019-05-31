@@ -6,7 +6,7 @@
                 <td>
                     <label>Workout Date: </label>
                     <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="txtDate" runat="server">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
@@ -39,12 +39,14 @@
         </div >
        
         <!---->
-        <button class="btn btn-success" id="btnAddToWorkout" runat="server" onclick="btnAddToWorkout_OnClick">Add to Workout</button>
+        <asp:Button class="btn btn-success" id="btnAddToWorkout" runat="server" onclick="btnAddToWorkout_OnClick" text="Add to Workout"/>
+      
     </div>
-    <table class="table" id="tblLog" >
+    <div class="col-lg-8" id="tblLog" runat="server">
         
-    </table>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    </div>
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label><br />
+    <asp:Label ID="lblErr" runat="server" Text="Label"></asp:Label>
     <div class="clearfix"></div>
 </asp:Content>
 

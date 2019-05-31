@@ -35,11 +35,60 @@ namespace WorkoutTrackerWeb
                 JObject json = new JObject();
                 using (var context = new WorkoutTrackerEntities1())
                 {
-                    var query = from areaExercises in context.WorkoutExercises where areaExercises.IdBodyArea == area select areaExercises;
+                    var query = from areaExercises in context.WorkoutExercises where areaExercises.IdBodyArea == area -1 select areaExercises;
                     var exercises = query.ToList<WorkoutExercise>();
                     return JsonConvert.SerializeObject(exercises);
                 }
             }
+        }
+        public string InsertWorkoutMaster(string WID, int UID, string date)
+        {
+            
+            using(var context = new WorkoutTrackerEntities1())
+            {
+                string workoutID = "";
+              
+                if (WID == "") //should be a new workout
+                {
+                    //test = "INSERT INTO PersonWorkoutMaster VALUES(" + UID + ", '" + date + "')";
+                    context.Database.ExecuteSqlCommand("INSERT INTO PersonWorkoutMaster VALUES(" + UID + ", '" + date + "')");
+                    context.SaveChanges();
+                    //get new workoutID
+                    workoutID = context.PersonWorkoutMasters.Max(p => p.IdWorkout).ToString();
+
+                }
+                else
+                {
+                    
+                }
+                //var query = from workoutMaster in context.PersonWorkoutMasters where workoutMaster.IdWorkout == WID select workoutMaster;
+
+                return workoutID.ToString();
+                
+            }
+            
+        }
+        public string InsertWorkoutDetail(int WID, int setNum, int wt, int reps, int exercise, int machine)
+        {
+            using (var context = new WorkoutTrackerEntities1())
+            {
+                //get max detail line
+                //var query = from dl in context.PersonWorkoutDetails where dl.IdPersonWorkout == WID select dl;
+                //var detailLine = query.FirstOrDefault<PersonWorkoutDetail>();
+                var detailLine = context.PersonWorkoutDetails.Select(p => p.IdDetailLine).DefaultIfEmpty(0).Max();
+                var query = from dl in context.PersonWorkoutDetails where dl.IdPersonWorkout == WID select dl;
+                var detailList = query.ToList<PersonWorkoutDetail>();
+                int nextDetailLine = Int32.Parse(detailLine.ToString()) + 1;
+                //insert new detail 
+
+                context.Database.ExecuteSqlCommand("INSERT INTO PersonWorkoutDetail VALUES("+ WID +","+ nextDetailLine + ","+ setNum +","+ wt +","+ reps +",NULL,"+ exercise +")");
+                JObject json = new JObject();
+
+                return JsonConvert.SerializeObject(detailList);
+
+            }
+
+
         }
         
     }
