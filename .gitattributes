@@ -1,8 +1,10 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
+# change repo language(s)
 * linguist-vendored
 *.cs linguist-vendored=false
+*.aspx linguist-vendored=false
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
