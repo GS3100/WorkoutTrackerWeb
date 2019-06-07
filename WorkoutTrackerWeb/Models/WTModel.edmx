@@ -39,6 +39,7 @@
           <Property Name="Reps" Type="int" Nullable="false" />
           <Property Name="Machine" Type="int" />
           <Property Name="Exercise" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="PersonWorkoutMaster">
           <Key>
@@ -73,6 +74,23 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WORKOUTTRACKERWEB\WORKOUTTRACKERWEB\APP_DATA\WORKOUTTRACKER.MDF.dbo.vw_WorkoutLogDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_WorkoutLogDetail">
+          <Key>
+            <PropertyRef Name="IdPersonWorkout" />
+            <PropertyRef Name="SetNumber" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="ExerciseName" />
+            <PropertyRef Name="BodyAreaName" />
+          </Key>
+          <Property Name="IdPersonWorkout" Type="int" Nullable="false" />
+          <Property Name="SetNumber" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="ExerciseName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BodyAreaName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="WorkoutTrackerModelStoreContainer">
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonDetHistory" EntityType="Self.PersonDetHistory" Schema="dbo" store:Type="Tables" />
@@ -81,6 +99,16 @@
           <EntitySet Name="WorkoutBodyArea" EntityType="Self.WorkoutBodyArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkoutExercise" EntityType="Self.WorkoutExercise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkoutMachine" EntityType="Self.WorkoutMachine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_WorkoutLogDetail" EntityType="Self.vw_WorkoutLogDetail" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_WorkoutLogDetail].[IdPersonWorkout] AS [IdPersonWorkout], 
+    [vw_WorkoutLogDetail].[SetNumber] AS [SetNumber], 
+    [vw_WorkoutLogDetail].[Notes] AS [Notes], 
+    [vw_WorkoutLogDetail].[Weight] AS [Weight], 
+    [vw_WorkoutLogDetail].[ExerciseName] AS [ExerciseName], 
+    [vw_WorkoutLogDetail].[BodyAreaName] AS [BodyAreaName]
+    FROM [dbo].[vw_WorkoutLogDetail] AS [vw_WorkoutLogDetail]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -106,6 +134,7 @@
           <EntitySet Name="WorkoutBodyAreas" EntityType="WorkoutTrackerModel.WorkoutBodyArea" />
           <EntitySet Name="WorkoutExercises" EntityType="WorkoutTrackerModel.WorkoutExercise" />
           <EntitySet Name="WorkoutMachines" EntityType="WorkoutTrackerModel.WorkoutMachine" />
+          <EntitySet Name="vw_WorkoutLogDetail" EntityType="WorkoutTrackerModel.vw_WorkoutLogDetail" />
         </EntityContainer>
         <EntityType Name="PersonDetHistory">
           <Key>
@@ -129,6 +158,7 @@
           <Property Name="Reps" Type="Int32" Nullable="false" />
           <Property Name="Machine" Type="Int32" />
           <Property Name="Exercise" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PersonWorkoutMaster">
           <Key>
@@ -163,6 +193,21 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vw_WorkoutLogDetail">
+          <Key>
+            <PropertyRef Name="IdPersonWorkout" />
+            <PropertyRef Name="SetNumber" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="ExerciseName" />
+            <PropertyRef Name="BodyAreaName" />
+          </Key>
+          <Property Name="IdPersonWorkout" Type="Int32" Nullable="false" />
+          <Property Name="SetNumber" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="ExerciseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BodyAreaName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -196,6 +241,7 @@
           <EntitySetMapping Name="PersonWorkoutDetails">
             <EntityTypeMapping TypeName="WorkoutTrackerModel.PersonWorkoutDetail">
               <MappingFragment StoreEntitySet="PersonWorkoutDetail">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Exercise" ColumnName="Exercise" />
                 <ScalarProperty Name="Machine" ColumnName="Machine" />
                 <ScalarProperty Name="Reps" ColumnName="Reps" />
@@ -240,6 +286,18 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IdMachine" ColumnName="IdMachine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_WorkoutLogDetail">
+            <EntityTypeMapping TypeName="WorkoutTrackerModel.vw_WorkoutLogDetail">
+              <MappingFragment StoreEntitySet="vw_WorkoutLogDetail">
+                <ScalarProperty Name="BodyAreaName" ColumnName="BodyAreaName" />
+                <ScalarProperty Name="ExerciseName" ColumnName="ExerciseName" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="SetNumber" ColumnName="SetNumber" />
+                <ScalarProperty Name="IdPersonWorkout" ColumnName="IdPersonWorkout" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -46,6 +46,8 @@ public partial class WorkoutTrackerEntities1 : DbContext
 
     public virtual DbSet<WorkoutMachine> WorkoutMachines { get; set; }
 
+    public virtual DbSet<vw_WorkoutLogDetail> vw_WorkoutLogDetail { get; set; }
+
 }
 
 }

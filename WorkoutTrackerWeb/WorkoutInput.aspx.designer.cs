@@ -76,13 +76,22 @@ namespace WorkoutTrackerWeb {
         protected global::System.Web.UI.WebControls.Button btnAddToWorkout;
         
         /// <summary>
-        /// tblLog control.
+        /// grdWOLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tblLog;
+        protected global::System.Web.UI.WebControls.GridView grdWOLog;
+        
+        /// <summary>
+        /// btnWOComplete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnWOComplete;
         
         /// <summary>
         /// Label1 control.

@@ -37,7 +37,9 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+
         <script src="Scripts/bootstrap-datepicker.js"></script>
+
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -68,9 +70,10 @@
         </div>
 
     </form>
-            <script type="text/javascript">
-                $(".datepicker").datepicker({"autoclose":"true"});
-</script>
-</body>
 
+</body>
+<script type="text/javascript">
+    $(".input-group.date").datepicker({ "autoclose": "true","todayHighlight": "true" });
+
+</script>
 </html>

@@ -5,11 +5,15 @@
             <tr>
                 <td>
                     <label>Workout Date: </label>
+                    <!--
                     <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control" id="txtDate" runat="server">
+                        <input type="text" class="form-control"  runat="server">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
+                    </div>-->
+                    <div class="input-group date">
+                      <input type="text" class="form-control" id="txtDate" runat="server"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                     </div>
                 </td><td>&nbsp;</td>
             </tr>
@@ -39,14 +43,16 @@
         </div >
        
         <!---->
-        <asp:Button class="btn btn-success" id="btnAddToWorkout" runat="server" onclick="btnAddToWorkout_OnClick" text="Add to Workout"/>
+        <asp:Button class="btn btn-success" id="btnAddToWorkout" runat="server" onclick="btnAddToWorkout_OnClick" text="Add to Workout"/><br />
       
     </div>
-    <div class="col-lg-8" id="tblLog" runat="server">
-        
+    
+    <div class="col-lg-12">
+        <asp:GridView class="table table-striped" runat="server" id="grdWOLog"></asp:GridView>
+        <asp:Button ID="btnWOComplete" class="btn btn-success" runat="server" Text="Workout Complete!" onclick="btnWOComplete_OnClick"/>
     </div>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label><br />
-    <asp:Label ID="lblErr" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="Label1" runat="server" ></asp:Label><br />
+    <asp:Label ID="lblErr" runat="server" ></asp:Label>
     <div class="clearfix"></div>
 </asp:Content>
 

@@ -41,6 +41,16 @@ namespace WorkoutTrackerWeb
                 }
             }
         }
+        public string LoadWorkoutDetail(int WID)
+        {
+           
+            using(var context = new WorkoutTrackerEntities1())
+            {
+                var query = from workoutLog in context.vw_WorkoutLogDetail where workoutLog.IdPersonWorkout == WID select workoutLog;
+                var logDetail = query.ToList<vw_WorkoutLogDetail>();
+                return JsonConvert.SerializeObject(logDetail);
+            }   
+        }
         public string InsertWorkoutMaster(string WID, int UID, string date)
         {
             
@@ -68,22 +78,25 @@ namespace WorkoutTrackerWeb
             }
             
         }
-        public string InsertWorkoutDetail(int WID, int setNum, int wt, int reps, int exercise, int machine)
+        public string InsertWorkoutDetail(int WID, int setNum, int wt, int reps, int exercise, int machine, string notes)
         {
             using (var context = new WorkoutTrackerEntities1())
             {
                 //get max detail line
-                //var query = from dl in context.PersonWorkoutDetails where dl.IdPersonWorkout == WID select dl;
-                //var detailLine = query.FirstOrDefault<PersonWorkoutDetail>();
-                var detailLine = context.PersonWorkoutDetails.Select(p => p.IdDetailLine).DefaultIfEmpty(0).Max();
+
+                //var detailLine = context.PersonWorkoutDetails.Select(p => p.IdDetailLine).DefaultIfEmpty(0).Max();
+                int detailLine = context.Database.SqlQuery<int>("SELECT COALESCE(MAX(IdDetailLine),0) as IdDetailLine FROM PersonWorkoutDetail WHERE IdPersonWorkout = " + WID)
+                   .FirstOrDefault();
+
                 var query = from dl in context.PersonWorkoutDetails where dl.IdPersonWorkout == WID select dl;
                 var detailList = query.ToList<PersonWorkoutDetail>();
-                int nextDetailLine = Int32.Parse(detailLine.ToString()) + 1;
+                //int nextDetailLine = Int32.Parse(detailLine.ToString()) + 1;
+ 
+                int nextDetailLine = detailLine + 1;
                 //insert new detail 
-
-                context.Database.ExecuteSqlCommand("INSERT INTO PersonWorkoutDetail VALUES("+ WID +","+ nextDetailLine + ","+ setNum +","+ wt +","+ reps +",NULL,"+ exercise +")");
+                context.Database.ExecuteSqlCommand("INSERT INTO PersonWorkoutDetail VALUES("+ WID +","+ nextDetailLine + ","+ setNum +","+ wt +","+ reps +",NULL,"+ exercise +",'"+ notes +"')");
                 JObject json = new JObject();
-
+                
                 return JsonConvert.SerializeObject(detailList);
 
             }

@@ -242,6 +242,9 @@
     <Compile Include="Models\PersonWorkoutMaster.cs">
       <DependentUpon>WTModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vw_WorkoutLogDetail.cs">
+      <DependentUpon>WTModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WorkoutBodyArea.cs">
       <DependentUpon>WTModel.tt</DependentUpon>
     </Compile>
