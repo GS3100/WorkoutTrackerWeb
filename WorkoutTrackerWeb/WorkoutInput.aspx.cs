@@ -23,7 +23,7 @@ namespace WorkoutTrackerWeb
                 {
                     selNumOfSets.Items.Add(i.ToString());
                 }
-                
+
                 // load combo box for body area
                 Workout.BodyArea bodyArea = new Workout.BodyArea();
                 dynamic loadBodyArea = JsonConvert.DeserializeObject(bodyArea.LoadBodyArea());
@@ -31,7 +31,8 @@ namespace WorkoutTrackerWeb
                 selBodyArea.Items.Add("Select");
                 selBodyArea.Items[0].Value = "0";
                 selExercise.Items.Add("Select");
-                foreach(var obj in loadBodyArea) {
+                foreach (var obj in loadBodyArea)
+                {
                     selBodyArea.Items.Add(obj.Name.ToString());
                     selBodyArea.Items[c].Value = obj.IdBodyArea;
                     c++;
@@ -40,48 +41,15 @@ namespace WorkoutTrackerWeb
             }
             else
             {
-
-            }
-            //display records for current workout
-            Session["WID"] = 13;
-            //if (!string.IsNullOrEmpty(Session["WID"] as string))
-            //{
-                DataTable dt = new DataTable();
-                DataRow dr = null;
-
-                Workout workout = new Workout();
-                dynamic workoutLogDetail = JsonConvert.DeserializeObject(workout.LoadWorkoutDetail(13));
-                dt.Columns.Add(new DataColumn("Exercise", typeof(string)));
-                dt.Columns.Add(new DataColumn("Set #", typeof(string)));
-                dt.Columns.Add(new DataColumn("Weight", typeof(string)));
-                dt.Columns.Add(new DataColumn("Reps", typeof(string)));
-
-
-                foreach (var item in workoutLogDetail)
-                {
-                dr = dt.NewRow();
-                //dr["Exercise"]
-                dr["Exercise"] = item.ExerciseName;
-                    dr["Set #"] = "Set";
-                    dr["Weight"] = "weight";
-                    dr["Reps"] = "reps";
-                dt.Rows.Add(dr);
-
-                ViewState["CurrentTable"] = dt;
-                grdWOLog.DataSource = dt;
-                grdWOLog.DataBind();
-
             }
 
-                Response.Write(workoutLogDetail);
 
-            //}
+
+
 
             
-
         }
-
-        protected void selNumOfSets_SelectedIndexChanged(object sender, EventArgs e)
+            protected void selNumOfSets_SelectedIndexChanged(object sender, EventArgs e)
         {
             
             int numOfSets = Int32.Parse(selNumOfSets.SelectedValue);
@@ -89,7 +57,7 @@ namespace WorkoutTrackerWeb
             for(var i = 1; i <= numOfSets; i++)
             {
                 
-                html += "<div class='input-group'><span class='input-group-addon'>Set " + i + "</span>"+
+                html += "<div class='input-group'><span class='input-group-addon bg-darkCobalt fg-white'>Set " + i + "</span>"+
                     "<input class='form-control' type='text' name='txtWt' id='txtWt_" + i + "' size='3' placeholder='Weight'/>" +
                     "<input class='form-control' type='text' name='txtReps' id='txtReps_" + i + "' size='3' placeholder='Reps'/>"+
                     "<textarea class='form-control' name='txtWONotes' placeholder='Notes'></textarea>" +
@@ -124,12 +92,15 @@ namespace WorkoutTrackerWeb
             string[] arrWt;
             string[] arrNotes;
 
+            // make workout complete button visible 
+            btnWOComplete.Visible = true;
+
             arrReps = Request.Form.GetValues("txtReps");
             arrWt = Request.Form.GetValues("txtWt");
             arrNotes = Request.Form.GetValues("txtWONotes");
             string date = txtDate.Value;
             int sets = selNumOfSets.SelectedIndex;
-            int UID = 1;
+            int UID = 1; //for now just keep it as me but eventually write a login script(s)
             Workout workout = new Workout();
             //Session["WID"] = "";
             string workoutLog = "";
@@ -161,7 +132,42 @@ namespace WorkoutTrackerWeb
                         workoutLog = workout.InsertWorkoutDetail(Int32.Parse(Session["WID"].ToString()), i + 1, Int32.Parse(arrWt[i]), Int32.Parse(arrReps[i]), Int32.Parse(selExercise.SelectedValue), 0, arrNotes[i].ToString());
                         //Response.Write(workoutLog);
                     }
-                } 
+                }
+                //display records for current workout
+                //Session["WID"] = 13;
+
+                if (!string.IsNullOrEmpty(Session["WID"] as string))
+                {
+                    string strWID = Session["WID"].ToString(); //string it
+                    int intWID = Convert.ToInt32(Session["WID"]);
+                    DataTable dt = new DataTable();
+                    DataRow dr = null;
+
+                    dynamic workoutLogDetail = JsonConvert.DeserializeObject(workout.LoadWorkoutDetail(intWID));
+                    dt.Columns.Add(new DataColumn("Exercise", typeof(string)));
+                    dt.Columns.Add(new DataColumn("Set #", typeof(string)));
+                    dt.Columns.Add(new DataColumn("Weight", typeof(string)));
+                    dt.Columns.Add(new DataColumn("Reps", typeof(string)));
+
+
+                    foreach (var item in workoutLogDetail)
+                    {
+                        dr = dt.NewRow();
+                        dr["Exercise"] = item.ExerciseName;
+                        dr["Set #"] = item.SetNumber;
+                        dr["Weight"] = item.Weight;
+                        dr["Reps"] = item.Reps;
+                        dt.Rows.Add(dr);
+
+                        ViewState["CurrentTable"] = dt;
+                        grdWOLog.DataSource = dt;
+                        grdWOLog.DataBind();
+
+                    }
+
+                    Response.Write(workoutLogDetail);
+
+                }
             }
             catch (Exception x)
             {
@@ -169,10 +175,12 @@ namespace WorkoutTrackerWeb
             }
 
         }
+
         protected void btnWOComplete_OnClick(object sender, EventArgs e)
         {
             Session["WID"] = "";
             txtDate.Attributes.Add("disabled", "false");
         }
+
     }
 }

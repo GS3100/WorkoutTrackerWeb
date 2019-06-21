@@ -13,7 +13,8 @@
                         </div>
                     </div>-->
                     <div class="input-group date">
-                      <input type="text" class="form-control" id="txtDate" runat="server"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        <div class="input-group-addon bg-darkCobalt fg-white"><i class="glyphicon glyphicon-th"></i></div>
+                        <input type="text" class="form-control" id="txtDate" runat="server">
                     </div>
                 </td><td>&nbsp;</td>
             </tr>
@@ -38,18 +39,20 @@
                 </td>
             </tr>
         </table>
+        <div class="clearfix"></div>
         <div id="DIVSetLog" class="col-lg-8" runat="server">
 
         </div >
        
         <!---->
-        <asp:Button class="btn btn-success" id="btnAddToWorkout" runat="server" onclick="btnAddToWorkout_OnClick" text="Add to Workout"/><br />
+        <asp:Button class="btn bg-darkCobalt fg-white" id="btnAddToWorkout" runat="server" onclick="btnAddToWorkout_OnClick" text="Add to Workout"/><br />
       
     </div>
     
     <div class="col-lg-12">
-        <asp:GridView class="table table-striped" runat="server" id="grdWOLog"></asp:GridView>
-        <asp:Button ID="btnWOComplete" class="btn btn-success" runat="server" Text="Workout Complete!" onclick="btnWOComplete_OnClick"/>
+        <div style="padding-top:15px;"></div>
+        <asp:GridView class="table table-striped table-bordered" runat="server" id="grdWOLog"></asp:GridView>
+        <asp:Button ID="btnWOComplete" class="btn btn-success" runat="server" Text="Workout Complete!" onclick="btnWOComplete_OnClick" Visible="False" />
     </div>
     <asp:Label ID="Label1" runat="server" ></asp:Label><br />
     <asp:Label ID="lblErr" runat="server" ></asp:Label>

@@ -30,6 +30,8 @@ public partial class vw_WorkoutLogDetail
 
     public string BodyAreaName { get; set; }
 
+    public int Reps { get; set; }
+
 }
 
 }

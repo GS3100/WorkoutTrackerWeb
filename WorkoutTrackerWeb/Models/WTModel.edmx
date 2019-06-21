@@ -72,7 +72,7 @@
           </Key>
           <Property Name="IdMachine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WORKOUTTRACKERWEB\WORKOUTTRACKERWEB\APP_DATA\WORKOUTTRACKER.MDF.dbo.vw_WorkoutLogDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -80,6 +80,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           <Key>
             <PropertyRef Name="IdPersonWorkout" />
             <PropertyRef Name="SetNumber" />
+            <PropertyRef Name="Reps" />
             <PropertyRef Name="Weight" />
             <PropertyRef Name="ExerciseName" />
             <PropertyRef Name="BodyAreaName" />
@@ -87,6 +88,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           <Property Name="IdPersonWorkout" Type="int" Nullable="false" />
           <Property Name="SetNumber" Type="int" Nullable="false" />
           <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Reps" Type="int" Nullable="false" />
           <Property Name="Weight" Type="int" Nullable="false" />
           <Property Name="ExerciseName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="BodyAreaName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -104,6 +106,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
     [vw_WorkoutLogDetail].[IdPersonWorkout] AS [IdPersonWorkout], 
     [vw_WorkoutLogDetail].[SetNumber] AS [SetNumber], 
     [vw_WorkoutLogDetail].[Notes] AS [Notes], 
+    [vw_WorkoutLogDetail].[Reps] AS [Reps], 
     [vw_WorkoutLogDetail].[Weight] AS [Weight], 
     [vw_WorkoutLogDetail].[ExerciseName] AS [ExerciseName], 
     [vw_WorkoutLogDetail].[BodyAreaName] AS [BodyAreaName]
@@ -191,7 +194,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           </Key>
           <Property Name="IdMachine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vw_WorkoutLogDetail">
           <Key>
@@ -200,6 +203,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
             <PropertyRef Name="Weight" />
             <PropertyRef Name="ExerciseName" />
             <PropertyRef Name="BodyAreaName" />
+            <PropertyRef Name="Reps" />
           </Key>
           <Property Name="IdPersonWorkout" Type="Int32" Nullable="false" />
           <Property Name="SetNumber" Type="Int32" Nullable="false" />
@@ -207,6 +211,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           <Property Name="Weight" Type="Int32" Nullable="false" />
           <Property Name="ExerciseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="BodyAreaName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Reps" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -292,6 +297,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           <EntitySetMapping Name="vw_WorkoutLogDetail">
             <EntityTypeMapping TypeName="WorkoutTrackerModel.vw_WorkoutLogDetail">
               <MappingFragment StoreEntitySet="vw_WorkoutLogDetail">
+                <ScalarProperty Name="Reps" ColumnName="Reps" />
                 <ScalarProperty Name="BodyAreaName" ColumnName="BodyAreaName" />
                 <ScalarProperty Name="ExerciseName" ColumnName="ExerciseName" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
