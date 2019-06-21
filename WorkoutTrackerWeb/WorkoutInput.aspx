@@ -13,7 +13,8 @@
                         </div>
                     </div>-->
                     <div class="input-group date">
-                      <input type="text" class="form-control" id="txtDate" runat="server"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        <div class="input-group-addon"><i class="glyphicon glyphicon-th"></i></div>
+                        <input type="text" class="form-control" id="txtDate" runat="server">
                     </div>
                 </td><td>&nbsp;</td>
             </tr>
@@ -38,6 +39,7 @@
                 </td>
             </tr>
         </table>
+        <div class="clearfix"></div>
         <div id="DIVSetLog" class="col-lg-8" runat="server">
 
         </div >

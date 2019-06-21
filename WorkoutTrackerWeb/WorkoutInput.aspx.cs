@@ -46,12 +46,13 @@ namespace WorkoutTrackerWeb
             Session["WID"] = 13;
             //if (!string.IsNullOrEmpty(Session["WID"] as string))
             //{
-                DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
                 DataRow dr = null;
 
                 Workout workout = new Workout();
-                dynamic workoutLogDetail = JsonConvert.DeserializeObject(workout.LoadWorkoutDetail(13));
-                dt.Columns.Add(new DataColumn("Exercise", typeof(string)));
+
+            dynamic workoutLogDetail = JsonConvert.DeserializeObject(workout.LoadWorkoutDetail(13));
+            dt.Columns.Add(new DataColumn("Exercise", typeof(string)));
                 dt.Columns.Add(new DataColumn("Set #", typeof(string)));
                 dt.Columns.Add(new DataColumn("Weight", typeof(string)));
                 dt.Columns.Add(new DataColumn("Reps", typeof(string)));
@@ -75,13 +76,13 @@ namespace WorkoutTrackerWeb
 
                 Response.Write(workoutLogDetail);
 
-            //}
+                //}
 
-            
 
-        }
 
-        protected void selNumOfSets_SelectedIndexChanged(object sender, EventArgs e)
+            }
+
+            protected void selNumOfSets_SelectedIndexChanged(object sender, EventArgs e)
         {
             
             int numOfSets = Int32.Parse(selNumOfSets.SelectedValue);
