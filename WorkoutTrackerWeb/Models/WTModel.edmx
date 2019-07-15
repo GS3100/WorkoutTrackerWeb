@@ -73,6 +73,7 @@
           <Property Name="IdMachine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
+          <Property Name="WeightOffset" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WORKOUTTRACKERWEB\WORKOUTTRACKERWEB\APP_DATA\WORKOUTTRACKER.MDF.dbo.vw_WorkoutLogDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -195,6 +196,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           <Property Name="IdMachine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WeightOffset" Type="Int32" />
         </EntityType>
         <EntityType Name="vw_WorkoutLogDetail">
           <Key>
@@ -288,6 +290,7 @@ warning 6002: The table/view 'C:\USERS\GEOFF.FAIRLANEPRODUCT.000\SOURCE\REPOS\WO
           <EntitySetMapping Name="WorkoutMachines">
             <EntityTypeMapping TypeName="WorkoutTrackerModel.WorkoutMachine">
               <MappingFragment StoreEntitySet="WorkoutMachine">
+                <ScalarProperty Name="WeightOffset" ColumnName="WeightOffset" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IdMachine" ColumnName="IdMachine" />

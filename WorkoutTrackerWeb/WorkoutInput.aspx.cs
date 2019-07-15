@@ -180,6 +180,7 @@ namespace WorkoutTrackerWeb
         {
             Session["WID"] = "";
             txtDate.Attributes.Add("disabled", "false");
+            Response.Redirect("WorkoutInput.aspx");
         }
 
     }

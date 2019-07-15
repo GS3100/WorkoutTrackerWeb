@@ -33,6 +33,19 @@ namespace WorkoutTrackerWeb
 
         }
 
+        public string LoadProfileDet(int ID)
+        {
+            using (var context = new WorkoutTrackerEntities1())
+            {
+                JObject ProfileDetail = new JObject();
+                var query = from userProfileDet in context.PersonDetHistory where userProfileDet.IdPerson == ID select userProfileDet;
+
+                var detailList = query.ToList<PersonDetHistory>();
+
+                return JsonConvert.SerializeObject(detailList);
+            }
+        }
+
         public void UpdateProfile(int ID, int weight, int heightInch)
         {
             //for now just focus on updating weight of the person

@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
+
 // Newtonsoft is awesome!  
+
 namespace WorkoutTrackerWeb
 {
     public partial class UserProfile : Page
@@ -14,9 +16,10 @@ namespace WorkoutTrackerWeb
         {
             if (!this.IsPostBack)
             {
+
                 //load default user information after login
                 User GetUser = new User();
-
+                
                 var GetPerson = JObject.Parse(GetUser.LoadProfile(1)); //---takes user ID / default to 1 for now
                 string FirstName = GetPerson["FirstName"].ToString();
                 string LastName = GetPerson["LastName"].ToString();
@@ -60,7 +63,15 @@ namespace WorkoutTrackerWeb
 
            
         }
-
-
+        //after testing move this to a new class
+        //builds the GridJS labels/data
+        public (string,string) userStats()
+        {
+            Report.BuildChart report = new Report.BuildChart();
+            string labels = report.Labels("Person").Item1;
+            string data = report.Labels("Person").Item2;
+  
+            return (labels.ToString(), data.ToString());
+        }
     }
 }

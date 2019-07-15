@@ -88,6 +88,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -148,10 +151,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Models\WTModel.edmx.diagram">
       <DependentUpon>WTModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="App_Data\WorkoutTracker.mdf" />
-    <Content Include="App_Data\WorkoutTracker_log.ldf">
-      <DependentUpon>WorkoutTracker.mdf</DependentUpon>
     </Content>
     <Content Include="Models\WTModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -270,6 +269,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WTModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Report.cs" />
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

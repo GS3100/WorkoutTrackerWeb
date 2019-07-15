@@ -24,6 +24,8 @@ public partial class WorkoutMachine
 
     public string Description { get; set; }
 
+    public Nullable<int> WeightOffset { get; set; }
+
 }
 
 }
